@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+    {% block content %}
+{% if user.is_authenticated %}
+<script>
+    window.location.replace("{% url 'votacao_inicial' %}");
+</script>
+{% endif %}
+ <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Autenticação</h5>
+                  <form method="post" class="text-center">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <br>
+                    <button type="submit" class="btn btn-lg btn-primary btn-block text-uppercase">Login</button>
+                  </form>
+            <br>
+            <span class="text-center"><br><p>Caso não possua conta, por favor se registre!<a href="{% url 'site_cadastro' %}"><button type="button" class="btn btn-outline-primary">Registre-se</button></a></p></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    {% endblock %}
